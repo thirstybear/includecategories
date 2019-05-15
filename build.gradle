@@ -1,0 +1,34 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+task integrationtest(type: Test) {
+    useJUnit {
+        includeCategories 'uk.co.thirstybear.includecategories.IntegrationTest'
+    }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+
+    testCompile 'junit:junit:4.1.2'
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+}
